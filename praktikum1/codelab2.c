@@ -1,10 +1,11 @@
 #include <stdio.h>
-#include <string.h> // Untuk fungsi strcpy
+#include <string.h> // untuk fungsi strcpy
+#include <stdbool.h> // Untuk fungsi bool
 
 int main() {
     // Demonstrasi nilai Boolean
-    int flagTrue = 1;   // 1 mewakili nilai true
-    int flagFalse = 0;  // 0 mewakili nilai false
+    bool flagTrue = true;  
+    bool flagFalse = false;  
 
     printf("Boolean values demonstration:\n");
     printf("flagTrue: %d\n", flagTrue);
