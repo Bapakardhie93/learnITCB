@@ -22,7 +22,7 @@ printf("%d ", arr[i]);: Setiap elemen array akan dicetak ke layar, diikuti oleh 
 printf("\n");: Setelah semua elemen dicetak, baris baru akan dibuat.
 Fungsi main:
 
-Deklarasi array: int angka[5] = {10, 20, 30, 40, 50}; Deklarasi sebuah array dengan nama angka yang berisi 5 elemen.
+Deklarasi array: int angka[5] = {5, 6, 7, 8, 9}; Deklarasi sebuah array dengan nama angka yang berisi 5 elemen.
 Pemanggilan fungsi: cetakArray(angka, 5); Fungsi cetakArray dipanggil dengan mengirimkan array angka dan ukurannya (5) sebagai argumen.
 Kenapa kita tidak perlu mendeklarasikan pointer secara eksplisit di dalam fungsi cetakArray?
 
