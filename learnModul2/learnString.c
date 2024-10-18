@@ -56,12 +56,9 @@ int main() {
     do {
         header();
         
-        // Membersihkan buffer sebelum membaca input
         printf("Masukkan huruf yang ingin dicari: ");
-        while (getchar() != '\n'); 
-        scanf("%c", &tujuan);
+        scanf(" %c", &tujuan);
         
-        // Reset found setiap iterasi
         found = 0;
 
         // Mencari karakter dalam array
@@ -81,7 +78,6 @@ int main() {
 
         // Menanyakan apakah pengguna ingin mengulang
         printf("\nApakah Anda Ingin Mengulang Program (y/n): ");
-        while (getchar() != '\n'); 
         scanf(" %c", &choice);  // Tambahkan spasi sebelum %c untuk mengabaikan whitespace
 
         // Jika pilihan adalah 'n', tampilkan footer
