@@ -9,7 +9,7 @@
 #define RESET "\033[0m"
 
 
-void cetakNamaBulan(int bulan)
+void fenitaCantik(int bulan)
 {
     switch (bulan)
     {
@@ -167,7 +167,7 @@ void bersihkanBufferInput()
 
         } while (!valid);
         printf(BLUE "\n%d ", hari);
-        cetakNamaBulan(bulan);
+        fenitaCantik(bulan);
         printf(" %d\n" RESET, tahun);
 
         bool pilihanValid = false;
