@@ -1,5 +1,3 @@
----
-
 # Contoh Operasi Aritmatika dan Bitwise dalam C
 
 Berikut adalah beberapa contoh operasi aritmatika dan bitwise yang menunjukkan cara kerja operator di dalam bahasa pemrograman C:
@@ -13,7 +11,6 @@ Operasi dilakukan sesuai dengan urutan prioritas operator. Operator perkalian di
 
 Hasil: **`17`**
 
-
 ---
 
 ### b. `10 - 7 + 3 % 6 = 6`
@@ -24,7 +21,7 @@ Urutan operasi dilakukan mulai dari modulus terlebih dahulu, kemudian diikuti de
 2. **Pengurangan**: `10 - 7 = 3`
 3. **Penjumlahan**: `3 + 3 = 6`
 
-Hasil: **6**
+Hasil: **`6`**
 
 ---
 
@@ -36,7 +33,7 @@ Urutan operasi dimulai dari modulus, kemudian pembagian, dan terakhir penguranga
 2. **Pembagian**: `3 / 2 = 1` (karena pembagian bilangan bulat menghasilkan bilangan bulat)
 3. **Pengurangan**: `1 - 1 = 0`
 
-Hasil: **0**
+Hasil: **`0`**
 
 ---
 
@@ -60,9 +57,9 @@ Hasil: **Ekspresi Tidak Valid**
 
 Operator `<<` adalah operator bitwise shift ke kiri. Angka `6` dalam biner adalah `00000110`. Menggeser bit ke kiri sebanyak 2 posisi menghasilkan:
 
-- `00000110` → `00011000` (ini sama dengan `24` dalam desimal).
+`00000110` → `00011000` (ini sama dengan `24` dalam desimal).
 
-Hasil: **24**
+Hasil: **`24`**
 
 ---
 
@@ -70,12 +67,10 @@ Hasil: **24**
 
 Operator `>>` adalah operator bitwise shift ke kanan. Angka `12` dalam biner adalah `00001100`. Menggeser bit ke kanan sebanyak 3 posisi menghasilkan:
 
-- `00001100` → `00000001` (ini sama dengan `1` dalam desimal).
+`00001100` → `00000001` (ini sama dengan `1` dalam desimal).
 
-Hasil: **1**
+Hasil: **`1`**
 
 ---
 
 **Catatan**: Ekspresi yang melibatkan increment pada literal (seperti `++5` atau `2++`) tidak valid dalam bahasa C karena increment/decrement hanya dapat digunakan pada variabel, bukan pada angka konstan.
-
----
