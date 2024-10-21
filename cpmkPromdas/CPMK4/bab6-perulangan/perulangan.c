@@ -88,10 +88,6 @@ int main()
                 printf(RED "\nERROR MASUKKAN INPUT DENGAN BENAR!\n" RESET);
             }
         } while (choice != 'y' && choice != 'Y' && choice != 'n' && choice != 'N');
-        if (choice != 'y' || choice != 'Y')
-        {
-            printf("\n");
-        }
     } while (choice == 'y' || choice == 'Y');
     printf(GREEN "Program selesai.\n\n" RESET);
 
