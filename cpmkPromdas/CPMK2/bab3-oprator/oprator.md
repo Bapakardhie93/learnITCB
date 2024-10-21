@@ -11,7 +11,8 @@ Operasi dilakukan sesuai dengan urutan prioritas operator. Operator perkalian di
 1. **Perkalian**: `3 * 5 = 15`
 2. **Penjumlahan**: `2 + 15 = 17`
 
-Hasil: **17**
+Hasil: **`17`**
+
 
 ---
 
