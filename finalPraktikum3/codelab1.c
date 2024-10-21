@@ -1,5 +1,7 @@
 #include <stdio.h>
 
+#define HARGA_NORMAL 1000000    
+
 #define RED "\033[0;31m"
 #define BLUE "\033[0;34m"
 #define GREEN "\033[0;32m"
@@ -68,7 +70,7 @@ int main()
         }
         if (hargaTiket != 0)
         {
-            hargaTiket = hargaNormal * diskon;
+            hargaTiket = HARGA_NORMAL * diskon;
             printf(BLUE "Harga tiket setelah diskon adalah: Rp." RESET);
             formatRupiah((long)hargaTiket);
             printf("\n");
