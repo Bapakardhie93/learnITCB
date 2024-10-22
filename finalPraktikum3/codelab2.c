@@ -7,9 +7,9 @@
 
 enum kategori
 {
-    economy = 250,
-    business = 500,
-    firstClass = 550
+    economy = 1,
+    business,
+    firstClass
 };
 
 void bersihkanBufferInput()
@@ -40,16 +40,16 @@ int main()
 
     switch (choice)
     {
-    case 1:
-        harga = economy;
+    case economy:
+        harga = 100;
         printf(BLUE "Anda memilih kategori: Economy\n" RESET);
         break;
-    case 2:
-        harga = business;
+    case business:
+        harga = 500;
         printf(BLUE "Anda memilih kategori: Business\n" RESET);
         break;
-    case 3:
-        harga = firstClass;
+    case firstClass:
+        harga = 1000;
         printf(BLUE "Anda memilih kategori: First Class\n" RESET);
         break;
     }
