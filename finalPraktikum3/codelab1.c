@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-#define HARGA_NORMAL 1000000    
+#define HARGA_NORMAL 1000000
 
 #define RED "\033[0;31m"
 #define BLUE "\033[0;34m"
@@ -31,7 +31,7 @@ void bersihkanBufferInput()
 int main()
 {
     int umur;
-    float hargaTiket = 1, hargaNormal = 1000000.0, diskon = 1.0;
+    float hargaTiket = 1, diskon = 1.0;
 
     while (1)
     {
