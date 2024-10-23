@@ -31,7 +31,7 @@ void header()
 
 void line()
 {
-    printf("\n-------------------------------------------------------------------------------\n");
+    printf("\n-------------------------------------------------------------------------------\n\n");
 }
 
 void clearInputBuffer()
@@ -243,6 +243,7 @@ int main()
             printf("\n");
         }
     } while (pembayaran < totalHarga);
+    line();
 
     if (pembayaran > totalHarga)
     {
@@ -255,6 +256,6 @@ int main()
     {
         printf(GREEN "Terima kasih, pembayaran Anda sudah pas.\n" RESET);
     }
-
+    line();
     return 0;
 }
