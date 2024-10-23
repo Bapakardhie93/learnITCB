@@ -21,11 +21,6 @@ void header()
     printf("\n----------------------------------- Bioskop -----------------------------------\n");
 }
 
-void line()
-{
-    printf("\n-------------------------------------------------------------------------------\n");
-}
-
 void clearInputBuffer()
 {
     int c;
@@ -65,7 +60,7 @@ int main()
             break;
         }
     }
-    line();
+    
     while (1)
     {
         printf("Pilih jenis tiket:\n1. Reguler - Rp%d\n2. VIP - Rp%d\n3. VVIP - Rp%d\n",
@@ -88,7 +83,7 @@ int main()
             break;
         }
     }
-    line();
+    
     while (1)
     {
         printf("Pilih hari:\n1. Weekday (diskon 15%%)\n2. Weekend (Harga normal)\n");
@@ -110,7 +105,7 @@ int main()
             break;
         }
     }
-    line();
+
     while (1)
     {
         printf("Apakah Anda member? (1 untuk Ya, 0 untuk Tidak): ");
@@ -130,7 +125,6 @@ int main()
             break;
         }
     }
-    line();
     
     // Menghitung total harga berdasarkan pilihan film dan tiket
     totalHarga = hargaTiket[pilihanTiket-1] + hargaFilm[pilihanFilm-1];
@@ -150,6 +144,7 @@ int main()
     }
 
     printf("Total harga: Rp. %.2f\n", totalHarga);
+    printf("Alamat memori variabel total: %p\n", (void*)&totalHarga);
 
     do
     {
@@ -166,7 +161,7 @@ int main()
             printf("Uang yang Anda masukkan kurang! Silahkan masukkan sesuai nominal.\n");
         }
     } while (pembayaran < totalHarga);
-    line();
+    
     if (pembayaran > totalHarga)
     {
         kembalian = pembayaran - totalHarga;
