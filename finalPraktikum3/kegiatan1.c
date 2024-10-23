@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <math.h>
+#include <stdbool.h>
 
 #define RED "\033[0;31m"
 #define GREEN "\033[0;32m"
@@ -31,7 +32,7 @@ void header()
 
 void line()
 {
-    printf("\n-------------------------------------------------------------------------------\n\n");
+    printf("-------------------------------------------------------------------------------\n");
 }
 
 void clearInputBuffer()
@@ -42,13 +43,73 @@ void clearInputBuffer()
     }
 }
 
+bool validasiTanggal(int hari, int bulan, int tahun)
+{
+
+    if (bulan < 1 || bulan > 12)
+    {
+        return false;
+    }
+
+    if (hari < 1 || hari > 31)
+    {
+        return false;
+    }
+
+    if ((bulan == 4 || bulan == 6 || bulan == 9 || bulan == 11) && hari > 30)
+    {
+        return false;
+    }
+
+    if (bulan == 2)
+    {
+        if ((tahun % 4 == 0 && tahun % 100 != 0) || (tahun % 400 == 0))
+        {
+            if (hari > 29)
+            {
+                return false;
+            }
+        }
+        else
+        {
+            if (hari > 28)
+            {
+                return false;
+            }
+        }
+    }
+
+    return true;
+}
+
+int hitungHariDariTanggal(int hari, int bulan, int tahun)
+{
+    if (bulan < 3)
+    {
+        bulan += 12;
+        bulan -= 2;
+    }
+
+    int k = tahun % 100;
+    int j = tahun / 100;
+
+    int h = (hari + (13 * (bulan + 1)) / 5 + k + (k / 4) + (j / 4) + (5 * j)) % 7;
+
+    return h;
+}
+
+bool isWeekday(int h)
+{
+    return (h >= 2 && h <= 6);
+}
+
 int pilihFilm()
 {
     int choice;
     while (1)
     {
         printf("Pilih film:\n1. Spiderman - Rp.%.0d\n2. Batman - Rp.%.0d\n3. Superman - Rp.%.0d\n4. Avengers - Rp.%.0d\n5. Joker - Rp.%.0d\n",
-               hargaFilm[SPIDERMAN], hargaFilm[BATMAN], hargaFilm[SUPERMAN], hargaFilm[AVENGERS], hargaFilm[JOKER]);
+               hargaFilm[0], hargaFilm[BATMAN], hargaFilm[SUPERMAN], hargaFilm[AVENGERS], hargaFilm[JOKER]);
         printf("Masukkan pilihan Anda (1-5): ");
 
         if (scanf("%d", &choice) != 1)
@@ -85,7 +146,7 @@ int pilihTiket()
             clearInputBuffer();
             continue;
         }
-
+        clearInputBuffer();
         if (choice < 1 || choice > 3)
         {
             printf(RED "Inputan tidak valid. Harap pilih angka dari 1 sampai 3!!\n" RESET);
@@ -96,33 +157,6 @@ int pilihTiket()
         }
     }
     return choice - 1;
-}
-
-int pilihHari()
-{
-    int choice;
-    while (1)
-    {
-        printf("Pilih hari:\n1. Weekday (diskon 15%%)\n2. Weekend (Harga normal)\n");
-        printf("Masukkan pilihan Anda (1-2): ");
-
-        if (scanf("%d", &choice) != 1)
-        {
-            printf(RED "Inputan tidak valid. Harap masukkan angka 1 atau 2!\n" RESET);
-            clearInputBuffer();
-            continue;
-        }
-
-        if (choice != 1 && choice != 2)
-        {
-            printf(RED "Inputan tidak valid. Harap pilih angka 1 atau 2!\n" RESET);
-        }
-        else
-        {
-            break;
-        }
-    }
-    return choice;
 }
 
 int pilihMember()
@@ -191,39 +225,77 @@ void formatRupiah(float harga)
 
 int main()
 {
-    int pilihanFilm, pilihanTiket, member, hari;
+    int pilihanFilm, pilihanTiket, member, hari, bulan, tahun, hariDalamMinggu;
+    char input[100];
     float totalHarga, pembayaran, kembalian;
     float diskonMember = 0.10, diskonWeekday = 0.15;
+    bool valid = false;
 
     header();
     pilihanFilm = pilihFilm();
     line();
     pilihanTiket = pilihTiket();
     line();
-    hari = pilihHari();
-    line();
+    do
+    {
+        printf("Masukkan tanggal pemesanan (format DD-MM-YYYY): ");
+        fgets(input, sizeof(input), stdin);
+
+        if (sscanf(input, "%d-%d-%d", &hari, &bulan, &tahun) == 3)
+        {
+            if (tahun >= 1000 && tahun <= 9999)
+            {
+                if (validasiTanggal(hari, bulan, tahun))
+                {
+                    valid = true;
+                }
+                else
+                {
+                    printf(RED "\nTanggal tidak valid!\n" RESET);
+                    valid = false;
+                }
+            }
+            else
+            {
+                printf(RED "\nTahun harus dalam format YYYY!\n" RESET);
+                valid = false;
+            }
+        }
+        else
+        {
+            printf(RED "\nInput tidak valid! Pastikan menggunakan format DD-MM-YYYY.\n" RESET);
+            valid = false;
+        }
+    } while (!valid);
+    
     member = pilihMember();
     line();
 
+    hariDalamMinggu = hitungHariDariTanggal(hari, bulan, tahun);
     totalHarga = hitungTotalHarga(pilihanFilm, pilihanTiket);
 
-    // Diskon weekday
-    if (hari == 1)
+    if (isWeekday(hariDalamMinggu))
     {
         totalHarga -= totalHarga * diskonWeekday;
-        printf(GREEN "Diskon weekday 15%% diterapkan!\n" RESET);
+        printf(GREEN "Diskon weekday 15%% berhasil diterapkan!\n" RESET);
+    }
+    else
+    {
+        printf(GREEN "Weekend, harga normal diterapkan!\n" RESET);
     }
 
-    // Diskon member jika bukan weekend
-    if (member == 1 && hari != 2)
+    if (member == 1)
     {
         totalHarga -= totalHarga * diskonMember;
-        printf(GREEN "Diskon member 10%% diterapkan!\n" RESET);
+        printf(GREEN "Diskon member 10%% berhasil diterapkan!\n" RESET);
     }
 
+    line();
     printf("Total harga: ");
     formatRupiah(totalHarga);
     printf("\n");
+    printf("Alamat memori variabel total: %p\n", (void *)&totalHarga);
+    line();
 
     // Input pembayaran
     do
