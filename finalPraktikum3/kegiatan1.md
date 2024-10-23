@@ -1,19 +1,20 @@
 # Deskripsi Program
 
-Program ini adalah aplikasi **bioskop** berbasis teks yang memungkinkan pengguna memilih film, jenis tiket, hari (weekday atau weekend), dan memanfaatkan diskon jika pengguna adalah member atau memilih hari weekday. Program ini dirancang untuk menghitung total harga tiket berdasarkan pilihan film dan jenis tiket, serta menerapkan diskon sesuai dengan kondisi yang berlaku. Pengguna kemudian dapat memasukkan jumlah pembayaran, dan program akan menghitung serta menampilkan kembalian (jika ada) dalam format rupiah yang benar.
+Program ini adalah aplikasi **bioskop** berbasis teks yang memungkinkan pengguna memilih film, jenis tiket, hari (weekday atau weekend), dan memanfaatkan diskon jika pengguna adalah member atau membeli tiket pada hari weekday. Program ini dirancang untuk menghitung total harga tiket berdasarkan pilihan film dan jenis tiket, serta menerapkan diskon sesuai dengan kondisi yang berlaku. Pengguna kemudian dapat memasukkan jumlah pembayaran, dan program akan menghitung serta menampilkan kembalian (jika ada) dalam format rupiah yang benar.
 
 ## Fitur Utama
+
 1. **Pemilihan Film**:
    Pengguna dapat memilih dari daftar film yang tersedia beserta harga tiket untuk setiap film. Harga tiket bervariasi antara film yang satu dengan yang lainnya.
-   
+
 2. **Pemilihan Jenis Tiket**:
    Pengguna dapat memilih jenis tiket yang diinginkan: *Reguler*, *VIP*, atau *VVIP*, yang memiliki harga berbeda-beda.
 
 3. **Pemilihan Hari**:
-   Pengguna dapat memilih antara weekday atau weekend. Jika memilih weekday, pengguna akan mendapatkan diskon 15%.
+   Pengguna memasukkan tanggal pemesanan dalam format DD-MM-YYYY, yang kemudian digunakan untuk menentukan apakah pembelian dilakukan pada weekday atau weekend. Diskon weekday sebesar 15% akan diterapkan secara otomatis jika pemesanan dilakukan pada weekday.
 
 4. **Diskon Member**:
-   Jika pengguna adalah member, program akan memberikan diskon tambahan sebesar 10%, tetapi diskon ini hanya berlaku pada weekday.
+   Jika pengguna adalah member, program akan memberikan diskon tambahan sebesar 10%. Diskon ini berlaku hanya jika pengguna membeli tiket pada weekday.
 
 5. **Pembayaran dan Kembalian**:
    Pengguna akan diminta untuk memasukkan jumlah uang yang dibayarkan. Program kemudian akan menghitung kembalian jika pembayaran melebihi total harga tiket.
@@ -23,15 +24,72 @@ Program ini adalah aplikasi **bioskop** berbasis teks yang memungkinkan pengguna
 
 ---
 
-## Penambahan Fitur
+# Penambahan Fitur
 
-1. **Pemilihan Hari dan Diskon Weekday**:
-   - Program ini menambahkan fitur di mana pengguna dapat memilih apakah mereka membeli tiket pada hari *weekday* atau *weekend*. 
-   - Jika pengguna memilih hari *weekday*, diskon 15% akan diterapkan secara otomatis.
+1. **Validasi Tanggal**:
+   - Program ini memvalidasi apakah tanggal yang dimasukkan pengguna sesuai dengan format DD-MM-YYYY dan apakah merupakan tanggal yang valid (termasuk pengecekan untuk tahun kabisat di bulan Februari).
    
-2. **Diskon Member**:
-   - Diskon tambahan sebesar 10% diberikan kepada pengguna yang merupakan member, tetapi hanya jika mereka membeli tiket pada *weekday*. Jika pengguna adalah member tetapi membeli tiket pada *weekend*, diskon ini tidak berlaku.
+2. **Penentuan Weekday atau Weekend**:
+   - Berdasarkan tanggal pemesanan yang dimasukkan, program menghitung hari dalam minggu untuk menentukan apakah diskon weekday (15%) dapat diterapkan.
+   
+3. **Diskon Member**:
+   - Diskon tambahan sebesar 10% diberikan kepada pengguna yang adalah member, tetapi hanya berlaku jika mereka membeli tiket pada weekday. Diskon ini tidak berlaku pada weekend.
 
+4. **Logic Diskon**:
+   1. Diskon weekday (15%) akan diterapkan jika pemesanan dilakukan pada hari kerja(senin hingga jumat).
+   2. Diskon member (10%) hanya akan diterapkan jika pengguna merupakan member.
+   3. Program memeriksa apakah hari termasuk weekend dan mengabaikan diskon member jika pemesanan dilakukan pada Sabtu atau Minggu.
+
+5. **Alamat Memori Total Harga**
+   - Di bawah tampilan total harga, program menambahkan informasi mengenai alamat memori dari variabel yang menyimpan nilai total harga:
+   ```c
+   printf("Alamat memori variabel total: %p\n", (void*)&totalHarga);
+   ```
+6. Fungsi `hitungHariDariTanggal`
+   - Fungsi ini digunakan untuk menghitung hari dalam seminggu dari tanggal yang diberikan. Hari dalam seminggu diwakili oleh angka berikut:
+   - 0: Sabtu
+   - 1: Minggu
+   - 2: Senin
+   - 3: Selasa
+   - 4: Rabu
+   - 5: Kamis
+   - 6: Jumat
+
+   ### Parameter:
+   - `int hari`: Hari dari tanggal yang ingin dihitung.
+   - `int bulan`: Bulan dari tanggal yang ingin dihitung.
+   - `int tahun`: Tahun dari tanggal yang ingin dihitung.
+
+   ### Logika:
+   1. Jika bulan kurang dari 3, tambahkan 12 ke bulan dan kurangi 2 dari bulan.
+   2. Hitung nilai `k` yang merupakan sisa bagi tahun dengan 100.
+   3. Hitung nilai `j` yang merupakan hasil bagi tahun dengan 100.
+   4. Gunakan rumus untuk menghitung hari dalam seminggu dan kembalikan hasilnya.
+
+   ### Contoh Penggunaan:
+   ```c
+   int hari = 15;
+   int bulan = 10;
+   int tahun = 2023;
+   int hariDihitung = hitungHariDariTanggal(hari, bulan, tahun);
+   ```
+7. fungsi `isWeekday` 
+   - Fungsi ini digunakan untuk menentukan apakah hari yang dihitung merupakan hari kerja (Senin hingga Jumat).
+
+   ### Parameter:
+   - `int h`: Nilai hari yang dihitung oleh fungsi `hitungHariDariTanggal`.
+
+   ### Mengembalikan:
+   - `true`: Jika hari merupakan hari kerja (Senin hingga Jumat).
+   - `false`: Jika bukan.
+   ### Contoh Penggunaan:
+   ```c
+   if (isWeekday(hariDihitung)) {
+      printf("Hari kerja");
+    } else {
+      printf("Akhir pekan");
+   }  
+   ```
 ---
 
 ## Penjelasan Format Rupiah
@@ -53,11 +111,11 @@ Berikut adalah kode untuk fungsi `formatRupiah()` yang memastikan format rupiah 
 ```c
 void formatRupiah(float harga)
 {
-    int bagianUtama = (int)harga;           // Ambil bagian utama (sebelum desimal)
-    int bagianDesimal = (int)((harga - bagianUtama) * 100);  // Ambil bagian desimal
-    char buffer[50], formatted[50] = "";    // Buffer dan string akhir
+    int bagianUtama = (int)harga;                           // Ambil bagian utama (sebelum desimal)
+    int bagianDesimal = (int)((harga - bagianUtama) * 100); // Ambil bagian desimal
+    char buffer[50], formatted[50] = "";                    // Buffer dan string akhir
     int len, count = 0;
-    
+
     // Ubah bagian utama ke string
     sprintf(buffer, "%d", bagianUtama);
     len = strlen(buffer);
@@ -80,5 +138,5 @@ void formatRupiah(float harga)
     }
 
     // Tambahkan desimal di akhir
-    printf(GREEN "Rp. %s,%02d" RESET, formatted, bagianDesimal);
+    printf(GREEN "Rp%s,%02d" RESET, formatted, bagianDesimal);
 }
