@@ -21,8 +21,8 @@ enum JenisTiket
     VVIP
 };
 
-const float hargaFilm[] = {50000, 55000, 60000, 70000, 45000};
-const float hargaTiket[] = {30000, 100000, 150000};
+const int hargaFilm[] = {50000, 55000, 60000, 70000, 45000};
+const int hargaTiket[] = {30000, 100000, 150000};
 
 void header()
 {
@@ -47,7 +47,7 @@ int pilihFilm()
     int choice;
     while (1)
     {
-        printf("Pilih film:\n1. Spiderman - Rp.%.0f\n2. Batman - Rp.%.0f\n3. Superman - Rp.%.0f\n4. Avengers - Rp.%.0f\n5. Joker - Rp.%.0f\n",
+        printf("Pilih film:\n1. Spiderman - Rp.%.0d\n2. Batman - Rp.%.0d\n3. Superman - Rp.%.0d\n4. Avengers - Rp.%.0d\n5. Joker - Rp.%.0d\n",
                hargaFilm[SPIDERMAN], hargaFilm[BATMAN], hargaFilm[SUPERMAN], hargaFilm[AVENGERS], hargaFilm[JOKER]);
         printf("Masukkan pilihan Anda (1-5): ");
 
@@ -75,7 +75,7 @@ int pilihTiket()
     int choice;
     while (1)
     {
-        printf("Pilih jenis tiket:\n1. Reguler - Rp.%.0f\n2. VIP - Rp.%.0f\n3. VVIP - Rp.%.0f\n",
+        printf("Pilih jenis tiket:\n1. Reguler - Rp.%.0d\n2. VIP - Rp.%.0d\n3. VVIP - Rp.%.0d\n",
                hargaTiket[REGULER], hargaTiket[VIP], hargaTiket[VVIP]);
         printf("Masukkan pilihan Anda (1-3): ");
 
