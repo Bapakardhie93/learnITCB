@@ -7,7 +7,7 @@ Selamat datang di **LearnITCB**! Repository ini berisi berbagai proyek dan mater
 ## Struktur Repository
 
 - **Proyek**: Berisi berbagai proyek yang dapat dipelajari dan diterapkan.
-- **Materi Pembelajaran**: Terdapat beberapa file dan dokumen yang memberikan penjelasan tentang teknologi terkini, bahasa pemrograman, dan teknik pengembangan perangkat lunak.
+- **Materi Pembelajaran**: Terdapat beberapa file dan dokumen yang berisi tentang materi modul-modul praktikan dan logika pemrograman
 
 ## Daftar Proyek
 
